@@ -18,6 +18,7 @@ public class TileGenerator : MonoBehaviour {
 
     private void GenerateMap(Vector3 midPoint)
     {
+        GameObject labyrinthParent = new GameObject("Labyrinth");
         int midNumberX = rows / 2;
         int midNumberY = columns / 2;
         for (int x = 0; x < rows; x++)
@@ -27,6 +28,7 @@ public class TileGenerator : MonoBehaviour {
                 if (x != midNumberX || y != midNumberY)
                 {
                     GameObject newObj = CreateGameObjectFromTile(GetTile());
+                    newObj.transform.parent = labyrinthParent.transform;
                     newObj.transform.position = new Vector3(x * lastTile.extentSize + (midPoint.x - ((rows * 0.5f) * lastTile.extentSize)),
                     midPoint.y,
                     y * lastTile.extentSize + (midPoint.z - ((rows * 0.5f) * lastTile.extentSize)));
@@ -34,10 +36,10 @@ public class TileGenerator : MonoBehaviour {
             }
         }
 
-        SetWalls(midPoint, midNumberX, midNumberY);
+        SetWalls(midPoint, midNumberX, midNumberY, labyrinthParent.transform);
     }
 
-    private void SetWalls(Vector3 midPoint, int midNumberX, int midNumberY)
+    private void SetWalls(Vector3 midPoint, int midNumberX, int midNumberY, Transform parent)
     {
         int doorPoint;
         bool doorInSideWalls = Random.value > 0.5f? true : false;
@@ -57,14 +59,14 @@ public class TileGenerator : MonoBehaviour {
                 // Left Wall
                 Instantiate(wallElement, new Vector3((midPoint.x - (midNumberX * lastTile.extentSize) - lastTile.extentSize),
                     midPoint.y,
-                    (y + midPoint.z) - lastTile.extentSize), Quaternion.identity);
+                    (y + midPoint.z) - lastTile.extentSize), Quaternion.identity, parent);
             }
             if (!doorInSideWalls || doorInFirst || y != doorPoint && y - 1 != doorPoint && y + 1 != doorPoint && doorInSideWalls)
             {
                 // Right Wall
                 Instantiate(wallElement, new Vector3(midPoint.x + (midNumberX * lastTile.extentSize),
                     midPoint.y,
-                    y + midPoint.z - lastTile.extentSize), Quaternion.identity);
+                    y + midPoint.z - lastTile.extentSize), Quaternion.identity, parent);
             }
         }
         for (int x = -midNumberX * (int)lastTile.extentSize; x < rows * lastTile.extentSize - (midNumberX * (int)lastTile.extentSize); x++)
@@ -74,18 +76,18 @@ public class TileGenerator : MonoBehaviour {
                 // Bottom Wall
                 Instantiate(wallElement, new Vector3(x + midPoint.x - lastTile.extentSize,
                     midPoint.y,
-                    (midPoint.z - midNumberY * lastTile.extentSize) - lastTile.extentSize), Quaternion.identity);
+                    (midPoint.z - midNumberY * lastTile.extentSize) - lastTile.extentSize), Quaternion.identity, parent);
             }
             if (doorInSideWalls || doorInFirst || x != doorPoint && x - 1 != doorPoint && x + 1 != doorPoint && !doorInSideWalls)
             { 
                 // Top Wall
                 Instantiate(wallElement, new Vector3(x + midPoint.x - lastTile.extentSize,
                     midPoint.y,
-                    midPoint.z + midNumberY * lastTile.extentSize), Quaternion.identity);
+                    midPoint.z + midNumberY * lastTile.extentSize), Quaternion.identity, parent);
             }
         }
         // Set wall in the upper right corner
-        Instantiate(wallElement, new Vector3(midPoint.x + midNumberX * lastTile.extentSize, midPoint.y, midPoint.z + midNumberY * lastTile.extentSize), Quaternion.identity);
+        Instantiate(wallElement, new Vector3(midPoint.x + midNumberX * lastTile.extentSize, midPoint.y, midPoint.z + midNumberY * lastTile.extentSize), Quaternion.identity, parent);
     }
 
     // Here are the rules for the generation supposed to go
