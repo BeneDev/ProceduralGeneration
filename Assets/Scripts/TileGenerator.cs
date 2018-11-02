@@ -14,6 +14,7 @@ public class TileGenerator : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         GenerateMap(midPoint);
+        //CreateGameObjectFromTile(GetTile(), wallHeightBase);
 	}
 
     private void GenerateMap(Vector3 midPoint)
@@ -76,14 +77,14 @@ public class TileGenerator : MonoBehaviour {
                 // Bottom Wall
                 Instantiate(wallElement, new Vector3(x + midPoint.x - lastTile.extentSize,
                     midPoint.y,
-                    (midPoint.z - midNumberY * lastTile.extentSize) - lastTile.extentSize), Quaternion.identity, parent);
+                    (midPoint.z - midNumberY * lastTile.extentSize) - lastTile.extentSize), Quaternion.Euler(new Vector3(0f, 90f, 0f)), parent);
             }
             if (doorInSideWalls || doorInFirst || x != doorPoint && x - 1 != doorPoint && x + 1 != doorPoint && !doorInSideWalls)
             { 
                 // Top Wall
                 Instantiate(wallElement, new Vector3(x + midPoint.x - lastTile.extentSize,
                     midPoint.y,
-                    midPoint.z + midNumberY * lastTile.extentSize), Quaternion.identity, parent);
+                    midPoint.z + midNumberY * lastTile.extentSize), Quaternion.Euler(new Vector3(0f, 90f, 0f)), parent);
             }
         }
         // Set wall in the upper right corner
@@ -127,21 +128,21 @@ public class TileGenerator : MonoBehaviour {
         GameObject newTile = new GameObject();
         if(tile.directions.Contains(Helper.Directions.Bottom))
         {
-            Instantiate(tile.way, new Vector3(0f, 0f, -1.5f), Quaternion.Euler(new Vector3(0f, -90f, 0f)), newTile.transform);
+            Instantiate(tile.way, new Vector3(0f, 0f, -((tile.extentSize / 5) + (tile.extentSize / 10))), Quaternion.Euler(new Vector3(0f, 0f, 0f)), newTile.transform);
         }
         if (tile.directions.Contains(Helper.Directions.Top))
         {
-            Instantiate(tile.way, new Vector3(0f, 0f, 1.5f), Quaternion.Euler(new Vector3(0f, 90f, 0f)), newTile.transform);
+            Instantiate(tile.way, new Vector3(0f, 0f, ((tile.extentSize / 5) + (tile.extentSize / 10))), Quaternion.Euler(new Vector3(0f, 0f, 0f)), newTile.transform);
         }
         if (tile.directions.Contains(Helper.Directions.Left))
         {
-            Instantiate(tile.way, new Vector3(-1.5f, 0f, 0f), Quaternion.Euler(new Vector3(0f, -180f, 0f)), newTile.transform);
+            Instantiate(tile.way, new Vector3(-((tile.extentSize / 5) + (tile.extentSize / 10)), 0f, 0f), Quaternion.Euler(new Vector3(0f, -90f, 0f)), newTile.transform);
         }
         if (tile.directions.Contains(Helper.Directions.Right))
         {
-            Instantiate(tile.way, new Vector3(1.5f, 0f, 0f), Quaternion.Euler(new Vector3(0f, 180f, 0f)), newTile.transform);
+            Instantiate(tile.way, new Vector3(((tile.extentSize / 5) + (tile.extentSize / 10)), 0f, 0f), Quaternion.Euler(new Vector3(0f, 90f, 0f)), newTile.transform);
         }
-        Instantiate(tile.middle, Vector3.zero, Quaternion.Euler(Vector3.zero), newTile.transform);
+        Instantiate(tile.middle, new Vector3(0f, 0f, 0f), Quaternion.Euler(Vector3.zero), newTile.transform);
         return newTile;
     }
 }

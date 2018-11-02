@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Name: Right-Top
   m_EditorClassIdentifier: 
   directions: 0200000003000000
-  extentSize: 5
-  way: {fileID: 1154430572464214, guid: 28c5defe2e4e1454a837885eb659a48b, type: 2}
-  middle: {fileID: 1224893006366294, guid: 7f0598da5b11b9946bf804b03e0a98ec, type: 2}
+  extentSize: 10
+  way: {fileID: 1648605967455638, guid: f087a8834151b4d4cad4ab4b7ffe386b, type: 2}
+  middle: {fileID: 1831514349063258, guid: 2bd8dc0ba13d73c4586420e3030110b8, type: 2}
