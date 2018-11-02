@@ -10,5 +10,6 @@ public class Tile : ScriptableObject {
 
     public float extentSize;
     public GameObject way;
+    public GameObject torchWall;
     public GameObject middle;
 }

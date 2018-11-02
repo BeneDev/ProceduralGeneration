@@ -128,19 +128,19 @@ public class TileGenerator : MonoBehaviour {
         GameObject newTile = new GameObject();
         if(tile.directions.Contains(Helper.Directions.Bottom))
         {
-            Instantiate(tile.way, new Vector3(0f, 0f, -((tile.extentSize / 5) + (tile.extentSize / 10))), Quaternion.Euler(new Vector3(0f, 0f, 0f)), newTile.transform);
+            Instantiate(Random.value > 0.2f? tile.way : tile.torchWall, new Vector3(0f, 0f, -((tile.extentSize / 5) + (tile.extentSize / 10))), Quaternion.Euler(new Vector3(0f, 0f, 0f)), newTile.transform);
         }
         if (tile.directions.Contains(Helper.Directions.Top))
         {
-            Instantiate(tile.way, new Vector3(0f, 0f, ((tile.extentSize / 5) + (tile.extentSize / 10))), Quaternion.Euler(new Vector3(0f, 0f, 0f)), newTile.transform);
+            Instantiate(Random.value > 0.2f ? tile.way : tile.torchWall, new Vector3(0f, 0f, ((tile.extentSize / 5) + (tile.extentSize / 10))), Quaternion.Euler(new Vector3(0f, 0f, 0f)), newTile.transform);
         }
         if (tile.directions.Contains(Helper.Directions.Left))
         {
-            Instantiate(tile.way, new Vector3(-((tile.extentSize / 5) + (tile.extentSize / 10)), 0f, 0f), Quaternion.Euler(new Vector3(0f, -90f, 0f)), newTile.transform);
+            Instantiate(Random.value > 0.2f ? tile.way : tile.torchWall, new Vector3(-((tile.extentSize / 5) + (tile.extentSize / 10)), 0f, 0f), Quaternion.Euler(new Vector3(0f, -90f, 0f)), newTile.transform);
         }
         if (tile.directions.Contains(Helper.Directions.Right))
         {
-            Instantiate(tile.way, new Vector3(((tile.extentSize / 5) + (tile.extentSize / 10)), 0f, 0f), Quaternion.Euler(new Vector3(0f, 90f, 0f)), newTile.transform);
+            Instantiate(Random.value > 0.2f ? tile.way : tile.torchWall, new Vector3(((tile.extentSize / 5) + (tile.extentSize / 10)), 0f, 0f), Quaternion.Euler(new Vector3(0f, 90f, 0f)), newTile.transform);
         }
         Instantiate(tile.middle, new Vector3(0f, 0f, 0f), Quaternion.Euler(Vector3.zero), newTile.transform);
         return newTile;
