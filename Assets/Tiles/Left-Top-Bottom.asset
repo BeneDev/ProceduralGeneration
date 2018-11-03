@@ -14,5 +14,5 @@ MonoBehaviour:
   directions: 010000000300000004000000
   extentSize: 10
   way: {fileID: 1648605967455638, guid: f087a8834151b4d4cad4ab4b7ffe386b, type: 2}
-  torchWall: {fileID: 1593008908299780, guid: 0604c671407dae54fac309211db0c05b, type: 2}
-  middle: {fileID: 1232246214655440, guid: 6713cb838b1d9da41af5a80f1bb36ab1, type: 2}
+  torchWall: {fileID: 1893993247865680, guid: fed3af07f7dee4d49bdff03061e97224, type: 2}
+  middle: {fileID: 1831514349063258, guid: 2bd8dc0ba13d73c4586420e3030110b8, type: 2}
