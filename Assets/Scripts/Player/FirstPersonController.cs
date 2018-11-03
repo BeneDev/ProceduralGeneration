@@ -168,31 +168,10 @@ public class FirstPersonController : MonoBehaviour
             float distance = horizontalMove.magnitude * Time.fixedDeltaTime;
             // Normalize horizontalMove since it should be used to indicate direction
             horizontalMove.Normalize();
-            RaycastHit hit;
 
-            // Check if the body's current velocity will result in a collision
-            if (rb.SweepTest(horizontalMove, out hit, distance))
+            if (rb.velocity.sqrMagnitude < (movementSettings.CurrentTargetSpeed*movementSettings.CurrentTargetSpeed))
             {
-                if (hit.collider.gameObject.layer == groundLayer)
-                {
-                    if (hit.point.y > transform.position.y - capColl.height * 0.25f)
-                    {
-                        // If so, stop the movement
-                        rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
-                    }
-                    else if (isGrounded)
-                    {
-                        // Move the character up, so the character takes a step up the collider
-                        transform.position += new Vector3(0f, (hit.point.y - (transform.position.y - (capColl.height * 0.5f))) * 1.6f, 0f);
-                    }
-                }
-            }
-            else if (rb.velocity.sqrMagnitude < (movementSettings.CurrentTargetSpeed*movementSettings.CurrentTargetSpeed))
-            {
-                if(!isOnSlope)
-                {
-                    rb.AddForce(desiredMove*SlopeMultiplier(), ForceMode.Impulse);
-                }
+                rb.AddForce(desiredMove*SlopeMultiplier(), ForceMode.Impulse);
             }
         }
 
@@ -224,10 +203,6 @@ public class FirstPersonController : MonoBehaviour
         if(rb.velocity.y >= maxYVelocity)
         {
             rb.velocity = new Vector3(rb.velocity.x, maxYVelocity, rb.velocity.z);
-        }
-        if(isOnSlope)
-        {
-            rb.drag = 0f;
         }
         jump = false;
     }
