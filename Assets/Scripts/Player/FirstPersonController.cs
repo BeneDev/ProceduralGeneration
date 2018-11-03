@@ -221,7 +221,6 @@ public class FirstPersonController : MonoBehaviour
                 StickToGroundHelper();
             }
         }
-        print(rb.velocity.y);
         if(rb.velocity.y >= maxYVelocity)
         {
             rb.velocity = new Vector3(rb.velocity.x, maxYVelocity, rb.velocity.z);
