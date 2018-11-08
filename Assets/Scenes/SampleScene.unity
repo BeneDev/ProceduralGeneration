@@ -423,7 +423,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a2c4974f4a814e9498e2005081d6920a, type: 2}
   rows: 15
   columns: 15
-  midPoint: {x: 0, y: 0, z: 0}
+  midPoint: {x: 0, y: 1, z: 0}
   wallElement: {fileID: 1440657939756726, guid: 2cc18b5b532fb3f478aeabacbb4fe1d4,
     type: 2}
 --- !u!4 &2117683033
